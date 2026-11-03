@@ -1,11 +1,22 @@
-// Creo array con los botones.
-const arrayBotones = ['Mar', 'Edificio', 'Arena', 'Señales', 'Cosa']
+// VARIABLES
 
-// Creo variable para referirnos a la section en html donde introduciremos los botones.
+/* Creo variable para referirnos al div de la section en html donde introduciremos los botones.*/
 const botonera = document.querySelector('#botonera')
 
-// Creo array que contenga las imnagenes.
+/* Creo variable para referirnos al div en la section donde introduciremos las fotos.*/
+const galeria = document.querySelector('#galeria')
+
+/* Creo variable para referirnos al div donde aparecerá la frase. */
+const frase = document.querySelector('#frase')
+
+
+
+/* Creo array con los botones.*/
+const arrayBotones = ['Mar', 'Edificio', 'Arena', 'Señales', 'Cosa']
+
+/* Creo array que contenga las imnagenes.*/
 const arrayImagenes = [
+
     {
         imagen: 'assets/viajes/viajes-1.jpg',
         alt: 'Mujer en hamaca frente al mar',
@@ -24,25 +35,25 @@ const arrayImagenes = [
         title: 'Viaje 3',
         tags: ['Señales', 'Cosa'],
     },
-     {
+    {
         imagen: 'assets/viajes/viajes-4.jpg',
         alt: 'Plaza España de Sevilla',
         title: 'Viaje 4',
         tags: ['Edificio', 'Cosa']
     },
-     {
+    {
         imagen: 'assets/viajes/viajes-5.jpg',
         alt: 'Puene en Plaza España de Sevilla',
         title: 'Viaje 5',
         tags: ['Edificio', 'Cosa'],
     },
-     {
+    {
         imagen: 'assets/viajes/viajes-6.jpg',
         alt: 'Tunel en paseo maritimo',
         title: 'Viaje 6',
         tags: ['Mar', 'Arena', 'Cosa'],
     },
-     {
+    {
         imagen: 'assets/viajes/viajes-7.jpg',
         alt: 'Castillo en lo alto de un pueblo',
         title: 'Viaje 7',
@@ -55,13 +66,23 @@ const arrayImagenes = [
 
 
 
-
-
-
-
-//Eventos
+//EVENTOS
 /* 1- Crear un evento para que cuando haga click sobre un boton, me devuelva sus tags.*/
 
+//Le decimos al documento que cada vez que haya click en
+document.addEventListener('click', (ev) => {
+
+    if (ev.target.matches('#botonera button')) {
+        //console.log('click sobre el boton') funciona.
+        //queremos que pinte el tag.
+        const tag = ev.target.id
+        pintarTag(tag)
+
+        const filtro = crearArrayFiltrado(tag)
+        console.log(filtro)
+    }
+
+})
 
 
 
@@ -70,17 +91,14 @@ const arrayImagenes = [
 
 
 
-
-
-
-
-
-//Funciones
+// FUNCIONES
 /* 1- Crear una funcion que coja los elementos del arrayBotones y los pinte como botones 
-en el section del HTML.
-Para ello metemos un for of que recorra el array  */
+en el section del HTML. */
+
+
 
 function crearButton() {
+
 
     for (let element of arrayBotones) {
         //creo una variable button que me va a crear una etiqueta button
@@ -88,30 +106,102 @@ function crearButton() {
         //a la etiqueta button le doy un id y un texto con el valor de tag(elementos de array)
         button.id = element;
         button.innerText = element;
-        /*añado el button a botonera (que es la variable para referirnos al section 
-        con id #botonera) */
+        //añado el button a botonera (que es la variable para referirnos al section con id #botonera) 
         botonera.append(button)
     }
 }
 
-crearButton()
 
-/* 2- Crear una funcion para que cada button tenga los tags de su imagen.
- Tenemos que comprobar que el id o innertext del boton sea igual que  */
-function asignarTags() {}
 
- /*//Creamos variable para almacenar los tags.
-    const tagsDeImagenes = []
 
-    //Usamos .forEach para recorrer el arrayImagenes.
-    arrayImagenes.forEach((imagen) => { 
-        //Usamos metodo .push para almacenar en tagsDeImagenes la propiedad .tags
-        tagsDeImagenes.push(imagen.tags);
-        
-    } );
-    //Hacemos return de tagsDeImagenes para que nos devuelva los tags de cada objeto.
-    return tagsDeImagenes
-  
+
+
+
+
+
+
+
+
+
+/* 2- Crear funcion que pinte el texto que contiene el boton*/
+function pintarTag(tag) {
+
+    console.log(tag)
+
 }
-//compruebo que la funcion me esta devolviendo los tags de cada elemento
-console.log(asignarTags()) */
+
+
+
+
+
+
+
+
+
+
+
+
+/* 3- funcion que me devuelva un array de los objetos del array padre que tengan x tag*/
+function crearArrayFiltrado(tagParaFiltrar) {
+
+    const arrayFiltrado = []
+
+    arrayImagenes.forEach((objetoImagen) => {
+
+        for (let tag of objetoImagen.tags) {
+            if (tag == tagParaFiltrar) {
+                arrayFiltrado.push(objetoImagen);
+                break;
+
+            }
+        }
+
+
+
+
+    })
+
+    return arrayFiltrado
+
+}
+
+
+
+
+
+
+
+/* 4- funcion que cree tantas imagenes como objetos en el array padre haya.*/
+function crearImagenes() {
+
+    for (let objeto of arrayImagenes) {
+
+        const imagen = document.createElement('IMG');
+        imagen.id = objeto.tags;
+        imagen.title = objeto.title;
+        imagen.src = objeto.imagen;
+        imagen.alt = objeto.alt;
+        galeria.append(imagen)
+    }
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+crearButton()
+crearImagenes()
