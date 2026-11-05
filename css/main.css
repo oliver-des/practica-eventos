@@ -1,5 +1,68 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+body {
+
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+header {
+
+    width: 100%;
+    margin: 10px;
+    text-align: center;
+    background-color: rgb(233, 229, 229);
+
+}
+
+
+
+
+#galeria {
+
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+#galeria article {
+
+    width: 47%;
+    margin-right: 3%;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*-----------------------------Media queries (responsive) 768px-----------------------------------------------*/
+@media (min-width: 768px) {
+#galeria article {
+
+    width: 30%;
+    margin-right: 3%;
+
+}
+
+
 }
